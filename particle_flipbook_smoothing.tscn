@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dinlmfnb2fcdm"]
+
+[ext_resource type="Material" uid="uid://1tf7t4goacrk" path="res://particle_flipbook_smoothing.tres" id="1_m1g8c"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iji04"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_y3p4q"]
+sky_material = SubResource("ProceduralSkyMaterial_iji04")
+
+[sub_resource type="Environment" id="Environment_lq260"]
+background_mode = 2
+sky = SubResource("Sky_y3p4q")
+tonemap_mode = 2
+glow_enabled = true
+glow_blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5bupr"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 1.0
+angle_min = -20.0
+angle_max = 20.0
+scale_max = 2.0
+color = Color(1.5, 1.5, 1.5, 1)
+hue_variation_max = 0.05
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_47ypr"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lq260")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = ExtResource("1_m1g8c")
+lifetime = 2.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_5bupr")
+draw_pass_1 = SubResource("QuadMesh_47ypr")
